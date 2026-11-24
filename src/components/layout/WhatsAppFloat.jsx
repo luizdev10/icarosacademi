@@ -32,7 +32,7 @@ export default function WhatsAppFloat() {
       rel="noopener noreferrer"
       aria-label="Falar no WhatsApp"
       tabIndex={visivel ? 0 : -1}
-      className={`fixed bottom-4 right-4 z-50 flex size-12 items-center justify-center rounded-full bg-acento text-tinta transition-[transform,opacity] duration-300 hover:scale-110 ${
+      className={`fixed bottom-4 right-4 z-50 flex size-12 items-center justify-center rounded-full bg-ouro text-grafite transition-[transform,opacity] duration-300 hover:scale-110 ${
         visivel ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
       }`}
     >

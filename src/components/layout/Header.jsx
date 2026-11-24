@@ -3,12 +3,14 @@ import { config, linkWhatsapp } from '../../config'
 import { aoClicarRota } from '../../lib/rota'
 import Button from '../ui/Button'
 import IconeWhatsApp from '../ui/IconeWhatsApp'
+import Logo from '../ui/Logo'
 
+const { nav } = config.textos
 const links = [
-  { rota: 'modalidades', texto: 'Modalidades', mostrar: config.modalidades.length > 0 },
-  { rota: 'nossos-planos', texto: 'Planos', mostrar: config.planos.length > 0 },
-  { rota: 'localizacao', texto: 'Localização', mostrar: true },
-  { rota: 'contato', texto: 'Contato', mostrar: true },
+  { rota: 'planos', texto: nav.planos, mostrar: config.planos.length > 0 },
+  { rota: 'modalidades', texto: nav.modalidades, mostrar: config.modalidades.length > 0 },
+  { rota: 'horarios', texto: nav.horarios, mostrar: config.horarios.length > 0 },
+  { rota: 'localizacao', texto: nav.localizacao, mostrar: true },
 ].filter((l) => l.mostrar)
 
 export default function Header() {
@@ -16,15 +18,15 @@ export default function Header() {
   const fechar = () => setAberto(false)
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-fundo">
-      <nav aria-label="Principal" className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-grafite text-white">
+      <nav aria-label="Principal" className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5">
         <a
           href="#/"
           onClick={aoClicarRota('', fechar)}
           aria-label={`${config.nome}: voltar ao início`}
-          className="flex min-h-11 min-w-0 items-center font-display text-2xl font-extrabold uppercase leading-none"
+          className="flex min-h-11 items-center"
         >
-          <span className="truncate">{config.nome}</span>
+          <Logo altura={40} />
         </a>
 
         <div className="hidden items-center gap-1 md:flex">
@@ -33,13 +35,13 @@ export default function Header() {
               key={l.rota}
               href={`#/${l.rota}`}
               onClick={aoClicarRota(l.rota)}
-              className="flex min-h-11 items-center px-3 text-sm font-medium text-papel/80 hover:text-acento"
+              className="flex min-h-11 items-center px-3 text-sm font-medium text-white/80 hover:text-ouro"
             >
               {l.texto}
             </a>
           ))}
           <Button href={linkWhatsapp} pequeno target="_blank" rel="noopener noreferrer" className="ml-3">
-            <IconeWhatsApp className="size-4" /> Falar no WhatsApp
+            <IconeWhatsApp className="size-4" /> {config.textos.botaoWhatsapp}
           </Button>
         </div>
 
@@ -58,19 +60,19 @@ export default function Header() {
       </nav>
 
       {aberto && (
-        <div id="menu-mobile" className="bg-fundo-2 px-5 pb-5 md:hidden">
+        <div id="menu-mobile" className="border-t border-white/10 bg-grafite px-5 pb-5 md:hidden">
           {links.map((l) => (
             <a
               key={l.rota}
               href={`#/${l.rota}`}
               onClick={aoClicarRota(l.rota, fechar)}
-              className="flex min-h-12 items-center text-base font-medium"
+              className="flex min-h-12 items-center border-b border-white/10 text-base font-medium"
             >
               {l.texto}
             </a>
           ))}
           <Button href={linkWhatsapp} target="_blank" rel="noopener noreferrer" className="mt-4 w-full" onClick={fechar}>
-            <IconeWhatsApp className="size-4" /> Falar no WhatsApp
+            <IconeWhatsApp className="size-4" /> {config.textos.botaoWhatsapp}
           </Button>
         </div>
       )}

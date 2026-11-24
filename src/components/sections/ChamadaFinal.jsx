@@ -1,21 +1,22 @@
-import { linkWhatsappVisita } from '../../config'
+import { config, linkWhatsappExperimental } from '../../config'
 import Button from '../ui/Button'
+import Reveal from '../ui/Reveal'
 import IconeWhatsApp from '../ui/IconeWhatsApp'
 
 export default function ChamadaFinal() {
+  const t = config.textos.chamada
   return (
-    <section id="contato" className="bg-acento px-5 py-24 text-fundo md:py-32">
-      <div className="mx-auto max-w-7xl">
-        <h2 className="font-display text-[clamp(3.5rem,11vw,9rem)] font-extrabold uppercase leading-[0.88]">
-          Venha treinar
-          <br />
-          com a gente
-        </h2>
-        <p className="mt-6 max-w-md text-xl">Chame no WhatsApp e combine uma visita.</p>
-        <Button href={linkWhatsappVisita} variante="escuro" target="_blank" rel="noopener noreferrer" className="mt-8">
-          <IconeWhatsApp className="size-5" /> Agendar uma visita
+    <section id="contato" className="relative overflow-hidden bg-ouro px-5 py-14 text-grafite md:py-20">
+      <div aria-hidden="true" className="faixa-diag faixa-diag-escura absolute inset-y-0 right-0 hidden !h-full w-1/3 opacity-20 md:block" />
+      <Reveal className="relative mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h2 className="text-3xl font-bold leading-tight tracking-tight md:text-4xl">{t.titulo}</h2>
+          <p className="mt-2 text-lg">{t.apoio}</p>
+        </div>
+        <Button href={linkWhatsappExperimental} variante="escuro" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto">
+          <IconeWhatsApp className="size-5" /> {t.botao}
         </Button>
-      </div>
+      </Reveal>
     </section>
   )
 }

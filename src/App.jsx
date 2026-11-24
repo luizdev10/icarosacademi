@@ -3,31 +3,29 @@ import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import WhatsAppFloat from './components/layout/WhatsAppFloat'
 import Hero from './components/sections/Hero'
-import Modalidades from './components/sections/Modalidades'
-import Estrutura from './components/sections/Estrutura'
+import HorariosFaixa from './components/sections/HorariosFaixa'
 import Planos from './components/sections/Planos'
-import Localizacao from './components/sections/Localizacao'
+import Modalidades from './components/sections/Modalidades'
 import ChamadaFinal from './components/sections/ChamadaFinal'
+import Estrutura from './components/sections/Estrutura'
+import Localizacao from './components/sections/Localizacao'
 import Faq from './components/sections/Faq'
-import PaginaPlanos from './components/pages/PaginaPlanos'
 import { irParaSecao, useRota } from './lib/rota'
 
 export default function App() {
   const rota = useRota()
-  const paginaPlanos = rota === 'planos'
-
   const primeiraVez = useRef(true)
 
   useEffect(() => {
     history.scrollRestoration = 'manual'
     if (primeiraVez.current) {
-      // Ao entrar ou atualizar, o site abre sempre no topo (ou em #/planos), nunca numa seção que ficou no endereço.
+      // Ao entrar ou atualizar, o site abre sempre no topo, nunca numa seção que ficou no endereço.
       primeiraVez.current = false
-      if (!paginaPlanos) history.replaceState(null, '', '#/')
+      history.replaceState(null, '', '#/')
       window.scrollTo({ top: 0 })
       return
     }
-    if (paginaPlanos || rota === '') {
+    if (rota === '') {
       window.scrollTo({ top: 0 })
     } else {
       requestAnimationFrame(() => {
@@ -36,24 +34,21 @@ export default function App() {
         history.replaceState(null, '', '#/')
       })
     }
-  }, [rota, paginaPlanos])
+  }, [rota])
 
   return (
     <>
       <Header />
-      {paginaPlanos ? (
-        <PaginaPlanos />
-      ) : (
-        <main>
-          <Hero />
-          <Planos />
-          <Modalidades />
-          <Estrutura />
-          <Localizacao />
-          <ChamadaFinal />
-          <Faq />
-        </main>
-      )}
+      <main>
+        <Hero />
+        <HorariosFaixa />
+        <Planos />
+        <Modalidades />
+        <ChamadaFinal />
+        <Estrutura />
+        <Localizacao />
+        <Faq />
+      </main>
       <Footer />
       <WhatsAppFloat />
     </>

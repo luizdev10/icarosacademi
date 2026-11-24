@@ -1,12 +1,16 @@
 @import 'tailwindcss';
 @custom-variant hover-capaz (@media (hover: hover) and (pointer: fine));
+
 @theme {
-  --color-fundo: #0b0b0b;
-  --color-fundo-2: #151515;
-  --color-papel: #ffffff;
-  --color-acento: #ffc20e;
-  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-  --font-texto: 'Archivo', system-ui, sans-serif;
+  --color-grafite: #25272a;
+  --color-grafite-2: #2f3236;
+  --color-creme: #f6f3ec;
+  --color-creme-2: #ebe6da;
+  --color-tinta: #1d1f21;
+  --color-ouro: #d4a233; /* ajustar ao tom real da logo quando o arquivo chegar */
+  --color-ouro-claro: #e0b44f;
+  --font-display: 'Sora', 'Segoe UI', system-ui, sans-serif;
+  --font-texto: 'Inter', system-ui, sans-serif;
   --ease-saida: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -14,48 +18,60 @@
   html { scroll-behavior: smooth; overflow-x: clip; }
   body {
     font-family: var(--font-texto);
-    background: var(--color-fundo);
-    color: var(--color-papel);
+    background: var(--color-creme);
+    color: var(--color-tinta);
     -webkit-font-smoothing: antialiased;
     overflow-x: clip;
   }
-  h1, h2, h3 { text-wrap: balance; }
-  ::selection { background: var(--color-acento); color: var(--color-fundo); }
-  :focus-visible { outline: 3px solid var(--color-acento); outline-offset: 3px; }
-  ::-webkit-scrollbar { width: 12px; }
-  ::-webkit-scrollbar-track { background: var(--color-fundo); }
-  ::-webkit-scrollbar-thumb { background: #3a3a3a; }
+  h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; }
+  ::selection { background: var(--color-ouro); color: var(--color-grafite); }
+  :focus-visible { outline: 3px solid var(--color-ouro); outline-offset: 3px; }
   section[id] { scroll-margin-top: 4rem; }
 }
 
 /* Botões: resposta imediata ao toque */
-.btn { transition: transform 160ms var(--ease-saida), background-color 160ms var(--ease-saida); }
+.btn { transition: transform 160ms var(--ease-saida), background-color 160ms var(--ease-saida), border-color 160ms var(--ease-saida); }
 .btn:active { transform: scale(0.97); }
+
+/* Faixas diagonais finas, só CSS: traços de cor chapada com espaço entre eles */
+.faixa-diag {
+  height: 10px;
+  background: repeating-linear-gradient(135deg, var(--color-ouro) 0 2px, transparent 2px 12px);
+}
+.divisor-diag::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 8px;
+  background: repeating-linear-gradient(135deg, var(--color-ouro) 0 2px, transparent 2px 12px);
+}
+.faixa-diag-escura {
+  background: repeating-linear-gradient(135deg, var(--color-grafite) 0 2px, transparent 2px 12px);
+}
 
 /* Revelação ao entrar na tela: só quando há JS, para o conteúdo nunca ficar escondido */
 .js .reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.55s var(--ease-saida), transform 0.55s var(--ease-saida);
+  transform: translateY(14px);
+  transition: opacity 0.5s var(--ease-saida), transform 0.5s var(--ease-saida);
   transition-delay: var(--d, 0ms);
 }
 .js .reveal.is-in { opacity: 1; transform: none; }
 
-/* Linhas clicáveis (modalidades) */
-.linha { transition: background-color 180ms var(--ease-saida), color 180ms var(--ease-saida); }
-@media (hover: hover) and (pointer: fine) {
-  .linha:hover { background: var(--color-acento); color: var(--color-fundo); }
-  .linha:hover p { color: var(--color-fundo); }
-}
+/* Entrada do hero ao carregar a página */
+.js .entra { animation: entra 0.7s var(--ease-saida) both; animation-delay: var(--d, 0ms); }
+@keyframes entra { from { opacity: 0; transform: translateY(18px); } }
 
-/* A anilha do hero dá uma volta ao carregar e para */
-@keyframes gira { from { transform: rotate(-200deg); } to { transform: none; } }
-.placa-gira { animation: gira 1.6s var(--ease-saida) both; }
+.sem-barra { scrollbar-width: none; }
+.sem-barra::-webkit-scrollbar { display: none; }
+
+.ponto-vivo { animation: pulsa 2s ease-in-out infinite; }
+@keyframes pulsa { 50% { opacity: 0.35; } }
 
 .faq-painel {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s var(--ease-saida);
+  transition: grid-template-rows 0.3s var(--ease-saida);
 }
 .faq-painel.is-aberto { grid-template-rows: 1fr; }
 .faq-icone::before, .faq-icone::after {
@@ -63,10 +79,10 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 16px;
-  height: 3px;
-  margin: -1.5px 0 0 -8px;
-  background: var(--color-acento);
+  width: 14px;
+  height: 2px;
+  margin: -1px 0 0 -7px;
+  background: currentColor;
   transition: transform 0.3s var(--ease-saida);
 }
 .faq-icone::after { transform: rotate(90deg); }
@@ -75,6 +91,6 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js .reveal { transition: none; opacity: 1; transform: none; }
-  .placa-gira { animation: none; }
-  .faq-painel, .faq-icone::before, .faq-icone::after, .btn, .linha, .opcao > span { transition: none; }
+  .ponto-vivo, .js .entra { animation: none; }
+  .faq-painel, .faq-icone::before, .faq-icone::after, .btn { transition: none; }
 }
