@@ -1,3 +1,4 @@
+// CONFIRMAR com o dono: autorização de uso da marca NUTRIFITNESS TRAINING CENTER em site e domínio (titular: Nutri Fitness CT Juazeiro LTDA; contratante: Nutrifitness CT Barbalha LTDA)
 // Todos os textos e dados do site vêm daqui.
 // Campos marcados com [CONFIRMAR] precisam ser validados com o dono antes de ir ao ar.
 // Listas vazias fazem a seção correspondente desaparecer sozinha.
@@ -13,7 +14,7 @@ export const config = {
 
   tituloAba: 'Nutrifitness Barbalha | Academia em Barbalha - CE',
   descricaoSEO:
-    'Nutrifitness Training Center, academia em Barbalha - CE. Veja modalidades, planos e localização e fale pelo WhatsApp.',
+    'Nutrifitness Barbalha, academia em Barbalha - CE. Veja modalidades, planos e localização e fale pelo WhatsApp.',
 
   whatsapp: '5588997532718',
   mensagemWhatsapp: 'Olá! Vim pelo site da Nutrifitness e gostaria de saber mais sobre os planos.',
@@ -48,7 +49,7 @@ export const config = {
       id: 'mensal-up',
       nome: 'Mensal Up',
       preco: 150,
-      descricao: 'Acesso às outras unidades e direito de trazer um amigo por semana para treinar.',
+      descricao: 'Acesso às unidades participantes e direito de trazer um amigo por semana para treinar.', // [CONFIRMAR] com o dono quais unidades
       destaque: true,
     },
     {
@@ -61,7 +62,7 @@ export const config = {
       id: 'familia',
       nome: 'Família',
       preco: 110,
-      descricao: 'Cada membro paga R$ 110,00, a partir de 3 pessoas da mesma família.',
+      descricao: 'Para 3 ou mais pessoas da mesma família.', // o valor (por pessoa) fica em preco
     },
   ],
 
@@ -70,14 +71,24 @@ export const config = {
   escolhaPlano: [
     { texto: 'O mês inteiro', plano: 'mensal' },
     { texto: '3 vezes por semana', plano: '3x-semana' },
-    { texto: 'Com um amigo e em outras unidades', plano: 'mensal-up' },
+    { texto: 'Com um amigo e em unidades participantes', plano: 'mensal-up' },
     { texto: 'Sou estudante', plano: 'estudante' },
     { texto: 'Com minha família (3 ou mais)', plano: 'familia' },
   ],
 
-  // Fotos reais da academia. Vazio = blocos sólidos neutros. Formato: { arquivo: 'fachada.jpg', alt: '...' }
-  fotos: [], // [CONFIRMAR] fachada, salão de musculação, área funcional
-  legendasEstrutura: ['Fachada', 'Salão de musculação', 'Área funcional'],
+  // Foto de fundo do hero. Com src vazio, o hero mostra a anilha desenhada.
+  // O arquivo fica em public/ (ex.: src: 'fotos/hero.jpg').
+  hero: {
+    imagem: { src: '', alt: '' }, // [CONFIRMAR] foto real da academia
+  },
+
+  // Fotos da seção Estrutura. Só entram as que tiverem src preenchido; sem nenhuma, a seção some.
+  // O arquivo fica em public/ (ex.: src: 'fotos/fachada.jpg').
+  fotos: [
+    { src: '', alt: 'Fachada da Nutrifitness Barbalha', legenda: 'Fachada' }, // [CONFIRMAR]
+    { src: '', alt: 'Salão de musculação da Nutrifitness Barbalha', legenda: 'Salão de musculação' }, // [CONFIRMAR]
+    { src: '', alt: 'Área de treino funcional da Nutrifitness Barbalha', legenda: 'Área funcional' }, // [CONFIRMAR]
+  ],
 
   faq: [
     {

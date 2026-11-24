@@ -46,9 +46,9 @@ export default function App() {
       ) : (
         <main>
           <Hero />
+          <Planos />
           <Modalidades />
           <Estrutura />
-          <Planos />
           <Localizacao />
           <ChamadaFinal />
           <Faq />

@@ -48,19 +48,6 @@
   .linha:hover p { color: var(--color-fundo); }
 }
 
-/* Escolha do plano */
-.opcao > span {
-  background: var(--color-fundo-2);
-  cursor: pointer;
-  transition: background-color 160ms var(--ease-saida), color 160ms var(--ease-saida), transform 160ms var(--ease-saida);
-}
-.opcao:active > span { transform: scale(0.97); }
-.opcao > input:checked + span { background: var(--color-acento); color: var(--color-fundo); }
-.opcao > input:focus-visible + span { outline: 3px solid var(--color-acento); outline-offset: 3px; }
-@media (hover: hover) and (pointer: fine) {
-  .opcao > input:not(:checked) + span:hover { background: #222; }
-}
-
 /* A anilha do hero dá uma volta ao carregar e para */
 @keyframes gira { from { transform: rotate(-200deg); } to { transform: none; } }
 .placa-gira { animation: gira 1.6s var(--ease-saida) both; }

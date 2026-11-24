@@ -19,12 +19,14 @@ export default function Footer() {
       </div>
       <p
         aria-hidden="true"
-        className="mt-12 select-none whitespace-nowrap text-center font-display text-[min(15.5vw,15rem)] font-extrabold uppercase leading-[0.8] text-papel"
+        className="mt-12 flex select-none flex-wrap justify-center gap-x-[0.25em] text-center font-display text-[15.5vw] font-extrabold uppercase leading-[0.85] text-papel md:text-[min(9.2vw,11.5rem)]"
       >
-        {config.nome.split(' ')[0]}
+        {config.nome.split(' ').map((palavra) => (
+          <span key={palavra}>{palavra}</span>
+        ))}
       </p>
       <div className="mx-auto flex max-w-7xl flex-wrap justify-between gap-x-6 gap-y-1 py-6 text-sm text-papel/60">
-        <span>© {new Date().getFullYear()} {config.nome} {config.subtitulo}</span>
+        <span>© {new Date().getFullYear()} {config.nome}</span>
         {config.previa && <span>Prévia do site, em avaliação</span>}
       </div>
     </footer>
