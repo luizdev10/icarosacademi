@@ -1,15 +1,15 @@
 const estilos = {
-  acento: 'bg-acento text-tinta hover:bg-tinta hover:text-acento',
-  escuro: 'bg-tinta text-papel hover:bg-acento hover:text-tinta',
-  claro: 'bg-papel text-tinta hover:bg-acento',
+  acento: 'bg-acento text-fundo hover-capaz:hover:bg-papel',
+  contorno: 'bg-white/10 text-papel hover-capaz:hover:bg-white/20',
+  escuro: 'bg-fundo text-papel hover-capaz:hover:bg-black',
 }
 
 export default function Button({ href, variante = 'acento', pequeno = false, className = '', children, ...rest }) {
   return (
     <a
       href={href}
-      className={`inline-flex items-center justify-center rounded-full font-medium transition-colors duration-200 ${
-        pequeno ? 'px-4 py-2 text-xs min-h-11' : 'px-7 py-3.5 text-sm min-h-11'
+      className={`btn inline-flex min-h-11 items-center justify-center gap-2 font-bold ${
+        pequeno ? 'px-4 py-2 text-sm' : 'px-6 py-3.5 text-base'
       } ${estilos[variante]} ${className}`}
       {...rest}
     >

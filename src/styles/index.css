@@ -1,102 +1,93 @@
 @import 'tailwindcss';
+@custom-variant hover-capaz (@media (hover: hover) and (pointer: fine));
 @theme {
-  --color-tinta: #0b0b0b;
+  --color-fundo: #0b0b0b;
+  --color-fundo-2: #151515;
   --color-papel: #ffffff;
-  --color-cinza: #efefef;
-  --color-cinza-2: #d9d9d9;
-  --color-acento: #ffd60a;
-  --font-display: 'Instrument Serif', Georgia, serif;
+  --color-acento: #ffc20e;
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   --font-texto: 'Archivo', system-ui, sans-serif;
-  --ease-saida: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-saida: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @layer base {
   html { scroll-behavior: smooth; overflow-x: clip; }
   body {
     font-family: var(--font-texto);
-    background: var(--color-papel);
-    color: var(--color-tinta);
+    background: var(--color-fundo);
+    color: var(--color-papel);
     -webkit-font-smoothing: antialiased;
     overflow-x: clip;
   }
-  ::selection { background: var(--color-acento); color: var(--color-tinta); }
+  h1, h2, h3 { text-wrap: balance; }
+  ::selection { background: var(--color-acento); color: var(--color-fundo); }
   :focus-visible { outline: 3px solid var(--color-acento); outline-offset: 3px; }
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-thumb { background: var(--color-tinta); border-radius: 10px; }
+  ::-webkit-scrollbar { width: 12px; }
+  ::-webkit-scrollbar-track { background: var(--color-fundo); }
+  ::-webkit-scrollbar-thumb { background: #3a3a3a; }
+  section[id] { scroll-margin-top: 4rem; }
 }
-.reveal {
+
+/* Botões: resposta imediata ao toque */
+.btn { transition: transform 160ms var(--ease-saida), background-color 160ms var(--ease-saida); }
+.btn:active { transform: scale(0.97); }
+
+/* Revelação ao entrar na tela: só quando há JS, para o conteúdo nunca ficar escondido */
+.js .reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.8s var(--ease-saida), transform 0.8s var(--ease-saida);
+  transform: translateY(16px);
+  transition: opacity 0.55s var(--ease-saida), transform 0.55s var(--ease-saida);
   transition-delay: var(--d, 0ms);
 }
-.reveal.is-in { opacity: 1; transform: none; }
-.mask {
-  overflow: hidden; display: block;
-  padding: 0.04em 0.12em 0.2em;
-  margin: -0.04em -0.12em -0.2em;
+.js .reveal.is-in { opacity: 1; transform: none; }
+
+/* Linhas clicáveis (modalidades) */
+.linha { transition: background-color 180ms var(--ease-saida), color 180ms var(--ease-saida); }
+@media (hover: hover) and (pointer: fine) {
+  .linha:hover { background: var(--color-acento); color: var(--color-fundo); }
+  .linha:hover p { color: var(--color-fundo); }
 }
-.mask > span {
-  display: block;
-  transform: translateY(105%);
-  transition: transform 0.9s var(--ease-saida);
-  transition-delay: var(--d, 0ms);
+
+/* Escolha do plano */
+.opcao > span {
+  background: var(--color-fundo-2);
+  cursor: pointer;
+  transition: background-color 160ms var(--ease-saida), color 160ms var(--ease-saida), transform 160ms var(--ease-saida);
 }
-.is-in .mask > span, .mask.is-in > span { transform: none; }
-@keyframes sobe { from { transform: translateY(105%); } to { transform: none; } }
-.mask > span.hero-in { transform: none; transition: none; animation: sobe 0.9s var(--ease-saida) both; }
-@keyframes marquee { to { transform: translateX(-50%); } }
-.marquee-track { animation: marquee 28s linear infinite; }
-@keyframes pulso {
-  0% { transform: scale(1); opacity: 0.7; }
-  100% { transform: scale(2.4); opacity: 0; }
+.opcao:active > span { transform: scale(0.97); }
+.opcao > input:checked + span { background: var(--color-acento); color: var(--color-fundo); }
+.opcao > input:focus-visible + span { outline: 3px solid var(--color-acento); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) {
+  .opcao > input:not(:checked) + span:hover { background: #222; }
 }
-.ping::after {
-  content: ''; position: absolute; inset: 0; border-radius: 9999px;
-  background: inherit; animation: pulso 1.6s ease-out infinite;
-}
-.grao::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.18;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
+
+/* A anilha do hero dá uma volta ao carregar e para */
+@keyframes gira { from { transform: rotate(-200deg); } to { transform: none; } }
+.placa-gira { animation: gira 1.6s var(--ease-saida) both; }
 
 .faq-painel {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.5s var(--ease-saida);
+  transition: grid-template-rows 0.35s var(--ease-saida);
 }
 .faq-painel.is-aberto { grid-template-rows: 1fr; }
-.faq-resposta {
-  opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity 0.35s var(--ease-saida), transform 0.5s var(--ease-saida);
-}
-.faq-painel.is-aberto .faq-resposta { opacity: 1; transform: none; transition-delay: 0.08s; }
-.faq-icone {
-  background: rgba(11, 11, 11, 0.06);
-  transition: transform 0.4s var(--ease-saida), background-color 0.25s, color 0.25s;
-}
 .faq-icone::before, .faq-icone::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 14px;
-  height: 2px;
-  margin: -1px 0 0 -7px;
-  border-radius: 2px;
-  background: var(--color-tinta);
+  width: 16px;
+  height: 3px;
+  margin: -1.5px 0 0 -8px;
+  background: var(--color-acento);
+  transition: transform 0.3s var(--ease-saida);
 }
 .faq-icone::after { transform: rotate(90deg); }
-.faq-icone.is-ativo { transform: rotate(45deg); background: var(--color-acento); }
-button:hover .faq-icone:not(.is-ativo) { background: var(--color-acento); }
-.faq-pergunta { transition: transform 0.4s var(--ease-saida); }
-.faq-pergunta.is-ativo { transform: translateX(6px); }
+.faq-icone.is-ativo::after { transform: rotate(0deg); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal, .mask > span { transition: none; opacity: 1; transform: none; }
-  .marquee-track, .ping::after, .mask > span.hero-in { animation: none; }
-  .faq-painel, .faq-resposta, .faq-icone, .faq-pergunta { transition: none; }
+  .js .reveal { transition: none; opacity: 1; transform: none; }
+  .placa-gira { animation: none; }
+  .faq-painel, .faq-icone::before, .faq-icone::after, .btn, .linha, .opcao > span { transition: none; }
 }

@@ -1,41 +1,56 @@
-import { useEffect, useState, lazy, Suspense } from 'react'
+import { useEffect, useRef } from 'react'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import WhatsAppFloat from './components/layout/WhatsAppFloat'
-import Inicio from './components/sections/Inicio'
-import Marquee from './components/ui/Marquee'
-import Promessa from './components/sections/Promessa'
-import Recursos from './components/sections/Recursos'
-import Sobre from './components/sections/Sobre'
-import Roadmap from './components/sections/Roadmap'
-import Depoimentos from './components/sections/Depoimentos'
+import Hero from './components/sections/Hero'
+import Modalidades from './components/sections/Modalidades'
+import Estrutura from './components/sections/Estrutura'
+import Planos from './components/sections/Planos'
+import Localizacao from './components/sections/Localizacao'
+import ChamadaFinal from './components/sections/ChamadaFinal'
 import Faq from './components/sections/Faq'
-
-const PoliticaPrivacidade = lazy(() => import('./components/pages/PoliticaPrivacidade'))
+import PaginaPlanos from './components/pages/PaginaPlanos'
+import { irParaSecao, useRota } from './lib/rota'
 
 export default function App() {
-  const [rota, setRota] = useState(window.location.hash)
-  useEffect(() => {
-    const f = () => { setRota(window.location.hash); if (window.location.hash.startsWith('#/')) window.scrollTo(0, 0) }
-    window.addEventListener('hashchange', f)
-    return () => window.removeEventListener('hashchange', f)
-  }, [])
+  const rota = useRota()
+  const paginaPlanos = rota === 'planos'
 
-  const privacidade = rota === '#/privacidade'
+  const primeiraVez = useRef(true)
+
+  useEffect(() => {
+    history.scrollRestoration = 'manual'
+    if (primeiraVez.current) {
+      // Ao entrar ou atualizar, o site abre sempre no topo (ou em #/planos), nunca numa seção que ficou no endereço.
+      primeiraVez.current = false
+      if (!paginaPlanos) history.replaceState(null, '', '#/')
+      window.scrollTo({ top: 0 })
+      return
+    }
+    if (paginaPlanos || rota === '') {
+      window.scrollTo({ top: 0 })
+    } else {
+      requestAnimationFrame(() => {
+        irParaSecao(rota)
+        // O endereço volta para #/ depois de rolar, para atualizar a página não repetir o salto.
+        history.replaceState(null, '', '#/')
+      })
+    }
+  }, [rota, paginaPlanos])
+
   return (
     <>
       <Header />
-      {privacidade ? (
-        <Suspense fallback={null}><PoliticaPrivacidade /></Suspense>
+      {paginaPlanos ? (
+        <PaginaPlanos />
       ) : (
         <main>
-          <Inicio />
-          <Promessa />
-          <Recursos />
-          <Sobre />
-          <Roadmap />
-          <Marquee itens={['Personal de verdade', 'Treine em qualquer lugar', 'Sem fidelidade', 'Plano que se ajusta a você']} />
-          <Depoimentos />
+          <Hero />
+          <Modalidades />
+          <Estrutura />
+          <Planos />
+          <Localizacao />
+          <ChamadaFinal />
           <Faq />
         </main>
       )}

@@ -30,9 +30,9 @@ export default function WhatsAppFloat() {
       href={linkWhatsapp}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Falar com o personal no WhatsApp"
+      aria-label="Falar no WhatsApp"
       tabIndex={visivel ? 0 : -1}
-      className={`fixed bottom-4 right-4 z-50 flex size-14 items-center justify-center rounded-full bg-acento text-tinta shadow-xl transition-[transform,opacity] duration-300 hover:scale-110 ${
+      className={`fixed bottom-4 right-4 z-50 flex size-14 items-center justify-center rounded-full bg-acento text-tinta transition-[transform,opacity] duration-300 hover:scale-110 ${
         visivel ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
       }`}
     >

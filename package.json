@@ -1,5 +1,5 @@
 {
-  "name": "pulso-personal",
+  "name": "nutrifitness-barbalha",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "motion": "^14.14.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },

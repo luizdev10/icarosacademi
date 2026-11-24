@@ -1,67 +1,110 @@
+// Todos os textos e dados do site vêm daqui.
+// Campos marcados com [CONFIRMAR] precisam ser validados com o dono antes de ir ao ar.
+// Listas vazias fazem a seção correspondente desaparecer sozinha.
+
 export const config = {
-  nome: '[SEU NOME AQUI]',
-  tituloAba: '[SEU NOME AQUI] | Personal trainer online',
-  descricaoSEO: 'Personal trainer com atendimento online e individual. Converse pelo WhatsApp e receba um plano de treino pensado para o seu objetivo, sua rotina e o equipamento que você tem.',
-  urlSite: '',
-  imagemCompartilhamento: 'og-image.jpg',
+  nome: 'Nutrifitness Barbalha',
+  subtitulo: 'Training Center',
+  tipo: 'Academia',
+  cidade: 'Barbalha - CE',
+  endereco: 'Rua Pero Coelho, 77, Centro, Barbalha - CE',
+  mapsLink:
+    'https://www.google.com/maps/search/?api=1&query=Nutrifitness+Barbalha+Rua+Pero+Coelho+77+Barbalha',
 
-  cref: 'CREF 000000-G/UF',
-  cidade: '[SUA CIDADE-UF]',
-  regiaoAtendida: '',
+  tituloAba: 'Nutrifitness Barbalha | Academia em Barbalha - CE',
+  descricaoSEO:
+    'Nutrifitness Training Center, academia em Barbalha - CE. Veja modalidades, planos e localização e fale pelo WhatsApp.',
 
-  whatsapp: '5500000000000',
-  mensagemWhatsapp: 'Oi! Quero conhecer o seu trabalho de personal online.',
-  instagram: '@seuperfil', // TROCAR pelo @ do cliente
-  email: '',
-  telefone: '',
-  cnpj: '',
+  whatsapp: '5588997532718',
+  mensagemWhatsapp: 'Olá! Vim pelo site da Nutrifitness e gostaria de saber mais sobre os planos.',
+  mensagemPlano: (plano) =>
+    `Olá! Vim pelo site da Nutrifitness e gostaria de saber mais sobre o plano ${plano}.`,
+  mensagemVisita: 'Olá! Vim pelo site da Nutrifitness e gostaria de agendar uma visita.',
 
-  mostrarPreco: true,
-  precoPrimeiroMes: 'R$ 00',
-  precoMensal: 'R$ 000',
+  instagram: 'nutrifitnessbarbalha',
+  instagramLink: 'https://instagram.com/nutrifitnessbarbalha',
 
-  fotoHero: null,
-  fotoPersonal: null,
+  // Enquanto o <meta name="robots" content="noindex"> estiver no index.html, o rodapé avisa que é uma prévia.
+  previa: true, // REMOVER quando o cliente aprovar
 
-  sobre: 'Sou personal trainer e atendo online. Na primeira conversa com cada aluno eu entendo objetivo, rotina e limitações antes de montar qualquer treino.',
-  especialidades: ['Emagrecimento', 'Hipertrofia', 'Condicionamento', 'Treino em casa'],
+  horarios: [], // [CONFIRMAR] ex.: [{ dias: 'Segunda a sexta', horas: '00h às 00h' }]. Oculto se vazio.
 
-  faq: [
+  modalidades: [
+    // [CONFIRMAR] modalidades e frases com o dono
+    { id: 'musculacao', titulo: 'Musculação', texto: 'Treino com pesos e máquinas.' },
+    { id: 'funcional', titulo: 'Funcional', texto: 'Exercícios de movimento do corpo todo.' },
+    { id: 'avaliacao', titulo: 'Avaliação física', texto: 'Avaliação do seu físico.' },
+  ],
+
+  parcerias: ['Wellhub', 'TotalPass'], // [CONFIRMAR]
+
+  // Valores vieram de stories antigos.
+  mostrarPreco: false, // [CONFIRMAR os valores com o dono antes de ligar]
+
+  planos: [
+    { id: 'mensal', nome: 'Mensal', preco: 130, descricao: 'Acesso à academia durante o mês.' },
+    { id: '3x-semana', nome: '3x na semana', preco: 100, descricao: 'Treino 3 vezes por semana.' },
     {
-      pergunta: 'Preciso ter experiência para começar?',
-      resposta: 'Não. Na primeira conversa o personal entende seu nível, sua rotina e suas limitações, e monta um plano que você consegue cumprir.',
+      id: 'mensal-up',
+      nome: 'Mensal Up',
+      preco: 150,
+      descricao: 'Acesso às outras unidades e direito de trazer um amigo por semana para treinar.',
+      destaque: true,
     },
     {
-      pergunta: 'Posso treinar sem academia?',
-      resposta: 'Pode. Você diz o que tem em casa (ou que só tem o peso do corpo) e o treino é feito em cima disso.',
+      id: 'estudante',
+      nome: 'Estudante',
+      preco: 110,
+      descricao: 'Disponível mensal ou semestral. Apresentar carteirinha, declaração ou comprovante de matrícula.',
     },
     {
-      pergunta: 'Como funciona o contato com o personal?',
-      resposta: 'Pelo WhatsApp. Você tira dúvidas e conversa sobre o seu plano sempre que precisar.',
-    },
-    {
-      pergunta: 'Posso cancelar quando quiser?',
-      resposta: 'Sim. Sem fidelidade e sem multa. Para cancelar, é só avisar pelo WhatsApp.',
-    },
-    {
-      pergunta: 'O primeiro mês realmente custa menos?',
-      resposta: 'Sim, o primeiro mês tem um valor de entrada. Depois segue o valor mensal do plano, informado antes de você contratar.',
-      apenasComPreco: true,
-    },
-    {
-      pergunta: 'Quanto custa?',
-      resposta: 'O valor é informado antes de você contratar, na conversa pelo WhatsApp.',
-      apenasSemPreco: true,
+      id: 'familia',
+      nome: 'Família',
+      preco: 110,
+      descricao: 'Cada membro paga R$ 110,00, a partir de 3 pessoas da mesma família.',
     },
   ],
 
-  depoimentos: [],
-  // DEPOIMENTOS: descomentar quando houver depoimentos reais do cliente
-  // depoimentos: [
-  //   { nome: 'Nome do aluno', objetivo: 'Objetivo do aluno', frase: 'Texto do depoimento, nas palavras do próprio aluno.' },
-  //   { nome: 'Nome do aluno', objetivo: 'Objetivo do aluno', frase: 'Texto do depoimento, nas palavras do próprio aluno.' },
-  //   { nome: 'Nome do aluno', objetivo: 'Objetivo do aluno', frase: 'Texto do depoimento, nas palavras do próprio aluno.' },
-  // ],
+  // Pergunta que ajuda a escolher o plano. Cada opção aponta para o id de um plano.
+  perguntaPlano: 'Como você quer treinar?',
+  escolhaPlano: [
+    { texto: 'O mês inteiro', plano: 'mensal' },
+    { texto: '3 vezes por semana', plano: '3x-semana' },
+    { texto: 'Com um amigo e em outras unidades', plano: 'mensal-up' },
+    { texto: 'Sou estudante', plano: 'estudante' },
+    { texto: 'Com minha família (3 ou mais)', plano: 'familia' },
+  ],
+
+  // Fotos reais da academia. Vazio = blocos sólidos neutros. Formato: { arquivo: 'fachada.jpg', alt: '...' }
+  fotos: [], // [CONFIRMAR] fachada, salão de musculação, área funcional
+  legendasEstrutura: ['Fachada', 'Salão de musculação', 'Área funcional'],
+
+  faq: [
+    {
+      pergunta: 'Como funciona a matrícula?',
+      resposta: '', // [CONFIRMAR] documentos, taxa e forma de pagamento. Oculta se vazia.
+    },
+    {
+      pergunta: 'Existe plano estudante?',
+      resposta:
+        'Sim. O plano Estudante pode ser mensal ou semestral, e é preciso apresentar carteirinha, declaração ou comprovante de matrícula.',
+    },
+    {
+      pergunta: 'Existe plano família?',
+      resposta: 'Sim. O plano Família vale a partir de 3 pessoas da mesma família.',
+    },
+    {
+      pergunta: 'Como agendo uma visita?',
+      resposta: 'Chame a academia pelo WhatsApp e combine o melhor momento para conhecer o espaço.',
+    },
+  ],
 }
 
-export const linkWhatsapp = `https://wa.me/${config.whatsapp}?text=${encodeURIComponent(config.mensagemWhatsapp)}`
+const wa = (texto) => `https://wa.me/${config.whatsapp}?text=${encodeURIComponent(texto)}`
+
+export const linkWhatsapp = wa(config.mensagemWhatsapp)
+export const linkWhatsappPlano = (nome) => wa(config.mensagemPlano(nome))
+export const linkWhatsappVisita = wa(config.mensagemVisita)
+
+export const formatarPreco = (valor) =>
+  `R$ ${valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
